@@ -1,0 +1,13 @@
+wheel
+Flask
+Werkzeug==0.16.1
+flask-cors
+flask-restplus
+
+# for ml
+numpy
+pandas
+scikit-learn==0.23.1
+pymystem3
+nltk
+pymorphy2
