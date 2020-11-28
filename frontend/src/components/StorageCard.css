@@ -1,0 +1,8 @@
+.storage-card-title {
+    color: black;
+    text-decoration: inherit;
+}
+
+.storage-card-title:hover {
+    color: black;
+}

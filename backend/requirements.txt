@@ -7,7 +7,3 @@ flask-restplus
 # for ml
 numpy
 pandas
-scikit-learn==0.23.1
-pymystem3
-nltk
-pymorphy2

@@ -1,0 +1,9 @@
+.profile-hover-card-title {
+    color: black;
+    font-size: 0.8em;
+    text-decoration: inherit;
+}
+
+.profile-hover-card-title:hover {
+    color: black;
+}

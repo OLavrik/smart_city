@@ -5,7 +5,7 @@ import re
 
 from setuptools import find_packages, setup
 
-VERSION_FILE = "smart_city_backend/__init__.py"
+VERSION_FILE = "smartcity/__init__.py"
 
 
 def read(rel_path):
@@ -23,7 +23,7 @@ def get_version():
 
 
 setup(
-    name="smart_city_backend",
-    version="0.1",
+    name="smartcity",
+    version=get_version(),
     packages=find_packages(),
 )

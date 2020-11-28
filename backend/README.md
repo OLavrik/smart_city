@@ -28,7 +28,26 @@ cd backend
 ./run.sh
 ```
 
+### Build docker
+
+```bash
+docker build -t "smartcity" ./
+```
+
+### Run docker for production
+
+```bash
+docker run -d -p 8080:8080 smartcity
+```
+
+
+### Run docker for development (attach to tty)
+
+```bash
+docker run -it -p 8080:8080 smartcity
+```
+
 #### Developing with PyCharm notes:
 - All dependencies stuff can be done via PyCharm menus
 - Mark `backend` directory as a *Sources root* - it will become blue
-- Create start target at `smart_city_backend\app.py`
+- Create start target at `backend\smartcity\app.py`
