@@ -16,7 +16,16 @@ class Header extends Component {
                     <MDBCollapse isOpen={this.state.collapse} navbar>
                         <MDBNavbarNav left>
                             <MDBNavItem>
-                                <MDBNavLink to="/stats">Stats</MDBNavLink>
+                                <MDBNavLink to="/stats">Статистики</MDBNavLink>
+                            </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/map">Регионы</MDBNavLink>
+                            </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/datamap">Карта данных</MDBNavLink>
+                            </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to="/addscript">Добавить парсер</MDBNavLink>
                             </MDBNavItem>
                         </MDBNavbarNav>
                     </MDBCollapse>

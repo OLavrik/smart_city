@@ -3,7 +3,6 @@ Flask
 Werkzeug==0.16.1
 flask-cors
 flask-restplus
-
-# for ml
 numpy
 pandas
+pymongo

@@ -1,0 +1,57 @@
+path {
+    transition: all .5s;
+    fill: rgb(238, 243, 250);
+    stroke: rgba(0, 0, 0, 0.5);
+}
+
+.indicator {
+    position: absolute;
+    /*display: inline;*/
+    background: #ccfdb7;
+    color: #185003;
+    padding: 10px 30px;
+    font: 20px Arial;
+    border-radius: 5px;
+    min-width: 300px;
+    display: none;
+    text-transform: capitalize;
+}
+
+.flag {
+    width: 80px;
+}
+
+.clear {
+    clear: both
+}
+
+.name {
+    float: left;
+    margin-right: 30px;
+}
+
+/*.flag{position:absolute;top:10px;right:20px;border:3px solid #f7ffe8;border-radius:3px;
+}*/
+
+.regs {
+    columns: 5;
+    padding: 10px;
+}
+
+.reg span {
+    font-size: 10px;
+
+}
+
+.regs div {
+    width: auto;
+    font-size: 14px;
+    /* columns: 3;*/
+    cursor: pointer;
+
+}
+
+
+.capital {
+    clear: both;
+}

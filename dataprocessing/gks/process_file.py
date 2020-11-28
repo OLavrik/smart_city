@@ -8,6 +8,14 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
 
 from processing_utils import process_module
 
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
+
+from pu import process_module
+
+print(process_module.__name__)
 names_list = ('Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu.csv', 
             'Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu__1-kanalizatsia.csv',
             'Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu_1.csv',

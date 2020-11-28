@@ -1,4 +1,4 @@
-# How to swtup development environment
+# How to setup development environment
  - python 3.6 or higher is required
 ### Create virtual environment
 ```

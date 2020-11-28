@@ -9,9 +9,10 @@ from smartcity.api import api
 dictConfig(
     {
         "version": 1,
+        "disable_existing_loggers":False,
         "formatters": {
             "default": {
-                "format": "%(levelname)9s -- %(asctime)s - %(module)s - %(message)s",
+                "format": "%(levelname)9s -- %(asctime)s - %(name)s - %(message)s",
             }
         },
         "handlers": {
@@ -22,9 +23,8 @@ dictConfig(
             }
         },
         "root": {"level": "DEBUG", "handlers": ["wsgi"]},
-        "yc_backend": {"level": "DEBUG", "handlers": ["wsgi"]},
-    }
-)
+        "smartcity": {"level": "DEBUG", "handlers": ["wsgi"]},
+    })
 
 os.environ["wsgi.url_scheme"] = "http"
 
@@ -33,6 +33,7 @@ def create_app(config=None):
     app = Flask(__name__)
     # app.config["SERVER_NAME"] = "a.ru"
     app.config["PREFERRED_URL_SCHEME"] = "https"
+    app.config["UPLOAD_FILES_PATH"] = "./"
 
     CORS(app)
 

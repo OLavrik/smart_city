@@ -12,28 +12,24 @@ class StatsTable extends Component {
     }
 
     composeHead = data => {
-        if (!data || !data.headers)
-            return;
+        if (!data || !data.columns)
+            return null;
         const headers =
-            data.headers.map(function (el, i) {
+            data.columns.map(function (el, i) {
                 return <th key={i}>{el}</th>;
             });
 
         return (<MDBTableHead>
             <tr>
-                <th></th>
                 {headers}
             </tr>
         </MDBTableHead>);
     }
 
-    composeRow = (rowName, rowData) => {
-        console.log(rowName);
-        console.log(rowData);
+    composeRow = (row) => {
         return (
             <tr>
-                <td>{rowName}</td>
-                {rowData && rowData.map(function (el, i) {
+                {row && row.map(function (el, i) {
                     return <td key={i}>{el}</td>;
                 })}
             </tr>
@@ -42,9 +38,9 @@ class StatsTable extends Component {
 
     composeBody = data => {
         if (!data || !data.data)
-            return;
+            return null;
 
-        const rows = Object.entries(data.data).map( arr => this.composeRow(...arr));
+        const rows = data.data.map( row => this.composeRow(row));
 
         return (
             <MDBTableBody>
@@ -56,8 +52,8 @@ class StatsTable extends Component {
     render() {
         const data = this.props.data;
         if (!data)
-            return;
-        console.log(data);
+            return null;
+        console.log("This is data", data);
         const tableHead = this.composeHead(data);
         const tableBody = this.composeBody(data);
         return (

@@ -1,9 +1,16 @@
+from smartcity.db import region_stats_collection
+
+
 def get_stats():
     result = {
-        "headers": ["Москва", "Спб", "Калуга"],
+        "headers": ["Москва", "Санкт-Петербург", "Калуга"],
         "data": {
-            "Точки Вайфай": [108, 62, 11],
-            "КСЦ": [8, 3, 0]
+            "Точки Wi-fi": [108, 62, 11],
+            "Автобусы с ГЛОНАСС": [8, 3, 0]
         }
     }
-    return result
+
+    res = region_stats_collection.find_one({"tag": "green_energy_costs"})
+    print("Res is", res)
+    del res["_id"]
+    return res

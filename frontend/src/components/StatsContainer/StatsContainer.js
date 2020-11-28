@@ -18,7 +18,7 @@ class StatsContainer extends Component {
     updateData = async () => {
         this.setState({loading: true});
         await new Promise((resolve) => {
-            setTimeout(resolve, 500);
+            setTimeout(resolve, 50);
         });
         const statsData = await getStats();
         this.setState({statsData, loading: false});
@@ -40,8 +40,11 @@ class StatsContainer extends Component {
                             Loading...
                         </div>
                     ) :
-                    (
+                    (this.state.statsData &&
+                        <div>
+                            <h3>{this.state.statsData.title}</h3>
                         <StatsTable data={this.state.statsData}/>
+                            </div>
                     )
                 }
             </div>
