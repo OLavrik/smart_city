@@ -4,9 +4,9 @@ import os
 import smartcity
 from flask import current_app
 from smartcity.api import req_parsers
-from flask_restplus import Api, Resource, fields
+from flask_restplus import Api, Resource
 
-from smartcity.business import get_stats
+from smartcity.business import get_stats, get_available_stats_list
 
 logger = logging.getLogger(__name__)
 
@@ -34,14 +34,30 @@ class StatsData(Resource):
     @api.response(500, "Internal Error")
     def get(self):
         """
-        Make prediction for a single profile
         :return:
         """
 
         logger.info(f'Stats requested')
-        resp = get_stats()
+        stats_tags = get_available_stats_list()
 
-        resp.update({"status": "Success"})
+        resp = {"status": "Success", "statsTags": stats_tags}
+        return resp, 200
+
+
+@api.route("/stats/<stats_tag>")
+class AvailableStats(Resource):
+    @api.response(200, "Success")
+    @api.response(400, "Validation Error")
+    @api.response(500, "Internal Error")
+    def get(self, stats_tag):
+        """
+        :return:
+        """
+
+        logger.info(f'Stats of tag {stats_tag} requested')
+        stats_result = get_stats(stats_tag)
+
+        resp = {"status": "Success", "stats": stats_result}
         return resp, 200
 
 

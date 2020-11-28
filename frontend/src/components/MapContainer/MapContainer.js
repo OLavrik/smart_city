@@ -11,17 +11,10 @@ class MapContainer extends Component {
     /*
      */
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            statsData: null,
-            loading: true,
-        }
-    }
-
     componentDidMount() {
         const idleColor = 'rgb(238, 243, 250';
         const hoverColor = '#97d6fc';
+        const parentProps = this.props;
         $('path').hover(function (e) {
             $('path').css('fill', '#fff');
             $('.indicator').html('');
@@ -30,6 +23,11 @@ class MapContainer extends Component {
             if ($(this).attr('name')) {
                 var name = $(this).attr('name');
                 $('<div>' + name + '</div>').appendTo('.indicator');
+            }
+
+            if ($(this).attr('value')) {
+                var value = $(this).attr('value');
+                $('<div>' + 'Значение в регионе: ' + value + '</div>').appendTo('.indicator');
             }
 
             $('.change').remove();
@@ -111,8 +109,8 @@ class MapContainer extends Component {
             ["RU-TA", "Республика Татарстан", ""],
             ["RU-ME", "Республика Марий Эл", ""],
             ["RU-CU", "Чувашская республика", ""],
-            ["RU-NIZ", "Нижегородская край", ""],
-            ["RU-VLA", "Владимировская область", ""],
+            ["RU-NIZ", "Нижегородская область", ""],
+            ["RU-VLA", "Владимирская область", ""],
             ["RU-MOS", "Московская область", ""],
             ["RU-KLU", "Калужская область", ""],
             ["RU-BEL", "Белгородская область", ""],
@@ -128,8 +126,7 @@ class MapContainer extends Component {
             ["RU-VOR", "Ставропольский край", ""],
             ["RU-SMO", "Смоленская область", ""],
             ["RU-TVE", "Тверская область", ""],
-            ["RU-PER", "Пермская область", ""],
-            ["RU-KHM", "Ханты-Мансийский АО", ""],
+            ["RU-PER", "Пермский край", ""],
             ["RU-KHM", "Ханты-Мансийский АО", ""],
             ["RU-TOM", "Томская область", ""],
             ["RU-IRK", "Иркутская область", ""],
@@ -139,17 +136,25 @@ class MapContainer extends Component {
         );
 
         $('path').each(function () {
+
             var regId = $(this).attr('id');
-            var flag = '';
+            var value = 'неизвестно'
             var name = '';
             for (var j = 0; j < idAarr2.length; j++) {
-
-                if (regId == idAarr2[j][0]) {
+                if (regId === idAarr2[j][0]) {
                     name = idAarr2[j][1];
-                    flag = 'flags/' + idAarr2[j][2];
-
+                    value = 25
                     $(this).attr('name', name);
-                    $(this).attr('flag', flag);
+                    $(this).attr('value', value);
+                }
+            }
+            if (parentProps) {
+                var ind = parentProps.data.data.find(elArr => (elArr[0] === name));
+                if (!ind)
+                    console.log("Data not found for", name)
+                else {
+                    value = ind[ind.length - 1];
+                    $(this).attr('value', value);
                 }
             }
 

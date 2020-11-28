@@ -69,10 +69,16 @@ async function doDelete(...args) {
 }
 
 
-export async function getStats() {
+export async function getStatsList() {
     const queryUrl = `${baseURL}/stats`;
     return doGet(queryUrl);
 }
+
+export async function getStatsByTag(tag) {
+    const queryUrl = `${baseURL}/stats/${tag}`;
+    return doGet(queryUrl);
+}
+
 
 export async function addNewScript(formData) {
     const queryUrl = `${baseURL}/parser`;

@@ -1,16 +1,21 @@
+import logging
+
 from smartcity.db import region_stats_collection
 
+logger = logging.getLogger(__name__)
 
-def get_stats():
-    result = {
-        "headers": ["Москва", "Санкт-Петербург", "Калуга"],
-        "data": {
-            "Точки Wi-fi": [108, 62, 11],
-            "Автобусы с ГЛОНАСС": [8, 3, 0]
-        }
-    }
 
-    res = region_stats_collection.find_one({"tag": "green_energy_costs"})
-    print("Res is", res)
+def get_available_stats_list():
+    db_resp = region_stats_collection.find({}, {"tag": 1, "title": 1})
+    tags_list = [{"tag": d["tag"], "title": d["title"]} for d in db_resp]
+    logger.info(f"Found available stats tags in DB: {tags_list}")
+    return tags_list
+
+
+def get_stats(stats_tag):
+    res = region_stats_collection.find_one({"tag": stats_tag})
+    if not res:
+        raise ValueError(f"Not found stats with tag {stats_tag}")
     del res["_id"]
+    logger.debug(f"Found stats table {res}")
     return res
