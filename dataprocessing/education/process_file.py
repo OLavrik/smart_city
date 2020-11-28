@@ -9,7 +9,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'))
 from processing_utils import process_module
 
 # Specify file names here
-names_list = ('Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu.csv',
+names_list = ('Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu.csv', 
             'Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu__1-kanalizatsia.csv',
             'Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu_1.csv',
             'Zatraty_na_meropriatia_po_energosberezheniyu.csv',
