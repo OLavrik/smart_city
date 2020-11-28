@@ -122,7 +122,7 @@ def convert_resource(resource):
 
 
 for label in ['COLD_WATER', 'HOT_WATER', 'ELECTRICITY', 'THERMAL_ENERGY']:
-    resource = dowload_resource('COLD_WATER')
+    resource = dowload_resource(label)
     dictionary = convert_resource(resource)
 
 
