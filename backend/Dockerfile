@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 MAINTAINER motorny.nikita@gmail.com
 
-RUN  apt-get update && apt-get install -y python3.7 python3.7-dev python3-pip
+RUN  apt-get update && apt-get install -y python3.7 python3.7-dev python3-pip gnupg wget
 RUN rm /usr/bin/python3 && ln -s /usr/bin/python3.7 /usr/bin/python3
 RUN python3 --version
 RUN python3 -m pip install --upgrade pip && python3 -m pip install wheel

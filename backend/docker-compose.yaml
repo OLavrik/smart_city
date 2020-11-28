@@ -1,0 +1,23 @@
+version: '3.3'
+
+
+services:
+  api:
+    build: ./
+    ports:
+      - 8080:8080
+    restart: on-failure:5
+    links:
+      - mongodb_container
+  mongodb_container:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=smartcity_deb
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=dbpassword
+    volumes:
+      - ../json_data:/var/lib/json_data
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
