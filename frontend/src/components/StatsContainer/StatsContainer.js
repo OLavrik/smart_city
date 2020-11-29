@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {getStatsList, getStatsByTag} from "../../Api";
 import StatsTable from "../StatsTable";
-import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from "mdbreact";
+import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer} from "mdbreact";
 import MapContainer from "../MapContainer";
 
 class StatsContainer extends Component {
@@ -53,7 +53,7 @@ class StatsContainer extends Component {
                              key={el.tag}>{el.title}</MDBDropdownItem>));
         return (
             <div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center mb-4">
                     <MDBDropdown>
                         <MDBDropdownToggle caret color="info">
                             Статистики
@@ -75,8 +75,12 @@ class StatsContainer extends Component {
                     ) :
                     (this.state.statsData &&
                         <div>
-                            <h3>{this.state.statsData.title}</h3>
-                            <MapContainer data={this.state.statsData}/>
+                            <div className="d-flex justify-content-center">
+                                <h3>{this.state.statsData.title}</h3>
+                            </div>
+                            <div>
+                                <MapContainer data={this.state.statsData}/>
+                            </div>
                             <StatsTable data={this.state.statsData}/>
                         </div>
                     )

@@ -21,10 +21,10 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header/>
-                    <MDBContainer className="mt-5 pt-5">
+                    <div className="mt-5 pt-5">
                         <Main/>
                         <ToastContainer hideProgressBar={true}/>
-                    </MDBContainer>
+                    </div>
                 </div>
             </BrowserRouter>
         );
