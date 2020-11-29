@@ -1,4 +1,6 @@
 {
+  "tag": "zkh_termal",
+  "title": "Оснащенность многоквартирных домов общедомовыми приборами учета теплоносителя",
   "columns": [
     "territory",
     "housesWithServiceType",

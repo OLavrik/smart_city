@@ -27,13 +27,26 @@ class StatsTable extends Component {
     }
 
     composeRow = (row) => {
-        return (
-            <tr>
-                {row && row.map(function (el, i) {
-                    return <td key={i}>{el}</td>;
-                })}
-            </tr>
-        )
+        if (Array.isArray(row)) {
+            return (
+                <tr>
+                    {row && row.map(function (el, i) {
+                        return <td key={i}>{typeof el === "number" ? el.toFixed(2): el}</td>;
+                    })}
+                </tr>
+            )
+        }
+        else
+        {
+            const arrOfRows = Object.values(row)[0];
+            return arrOfRows.map(row => (
+                <tr>
+                    {row && row.map(function (el, i) {
+                        return <td key={i}>{typeof el === "number" ? el.toFixed(2): el}</td>;
+                    })}
+                </tr>
+            ))
+        }
     }
 
     composeBody = data => {

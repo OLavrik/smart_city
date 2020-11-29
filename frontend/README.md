@@ -1,4 +1,4 @@
-# LINS
+# SmartCity frontend
 
 ## To start development
 

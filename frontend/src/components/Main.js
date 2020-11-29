@@ -15,7 +15,6 @@ class Main extends Component {
         return (
             <Switch>
                 <Route path='/stats' component={StatsContainer}/>
-                <Route path='/map' component={MapContainer}/>
                 <Route path='/datamap' render={() => <img style={{width:"100%"}} src={datamap} alt="Datamap" />}/>
                 <Route path='/addscript' component={AddScript}/>
             </Switch>

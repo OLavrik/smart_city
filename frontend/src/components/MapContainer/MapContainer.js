@@ -19,16 +19,30 @@ class MapContainer extends Component {
             $('path').css('fill', '#fff');
             $('.indicator').html('');
             var id = $(this).attr('id').toUpperCase();
-
+            var name = '';
             if ($(this).attr('name')) {
-                var name = $(this).attr('name');
+                name = $(this).attr('name');
                 $('<div>' + name + '</div>').appendTo('.indicator');
             }
 
-            if ($(this).attr('value')) {
-                var value = $(this).attr('value');
-                $('<div>' + 'Значение в регионе: ' + value + '</div>').appendTo('.indicator');
+            // if ($(this).attr('value')) {
+            //     var value = $(this).attr('value');
+            //     $('<div>' + 'Значение в регионе: ' + value + '</div>').appendTo('.indicator');
+            // }
+            if (parentProps) {
+                var ind = parentProps.data.data.find(elObj => (Object.keys(elObj)[0] === name))
+                console.log(ind)
+                if (!ind)
+                    console.log("Data not found for", name)
+                else {
+                    var citiesArr = ind[name];
+                    citiesArr && citiesArr.forEach( city => {
+                        city[city.length - 1] && $('<div>' + city[0] + ': ' + (city[city.length - 1] / 100).toFixed(3) + '</div>').appendTo('.indicator');
+                        }
+                    )
+                }
             }
+
 
             $('.change').remove();
 
@@ -143,20 +157,20 @@ class MapContainer extends Component {
             for (var j = 0; j < idAarr2.length; j++) {
                 if (regId === idAarr2[j][0]) {
                     name = idAarr2[j][1];
-                    value = 25
                     $(this).attr('name', name);
-                    $(this).attr('value', value);
                 }
             }
-            if (parentProps) {
-                var ind = parentProps.data.data.find(elArr => (elArr[0] === name));
-                if (!ind)
-                    console.log("Data not found for", name)
-                else {
-                    value = ind[ind.length - 1];
-                    $(this).attr('value', value);
-                }
-            }
+            // if (parentProps) {
+            //
+            //     var ind = parentProps.data.data.find(elObj => (Object.keys(elObj)[0] === name))
+            //     console.log(ind)
+            //     if (!ind)
+            //         console.log("Data not found for", name)
+            //     else {
+            //         value = ind[ind.length - 1];
+            //         $(this).attr('value', value);
+            //     }
+            // }
 
             var regIdDiv = '<div class="reg" >' + '[' + '<span>' + regId + '</span>' + ']' + ' ' + name + '</div>'
             $(regIdDiv).appendTo('.regs');

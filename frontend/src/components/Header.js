@@ -19,9 +19,6 @@ class Header extends Component {
                                 <MDBNavLink to="/stats">Статистики</MDBNavLink>
                             </MDBNavItem>
                             <MDBNavItem>
-                                <MDBNavLink to="/map">Регионы</MDBNavLink>
-                            </MDBNavItem>
-                            <MDBNavItem>
                                 <MDBNavLink to="/datamap">Карта данных</MDBNavLink>
                             </MDBNavItem>
                             <MDBNavItem>
