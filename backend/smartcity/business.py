@@ -1,6 +1,7 @@
 import logging
 
 from smartcity.db import region_stats_collection
+from smartcity.create_pdf import create_plot
 
 logger = logging.getLogger(__name__)
 
@@ -19,3 +20,9 @@ def get_stats(stats_tag):
     del res["_id"]
     logger.debug(f"Found stats table {res}")
     return res
+
+
+def get_pdf(stats_tag):
+    data = get_stats(stats_tag)
+    logger.debug("Converting to PDF")
+    create_plot(data)

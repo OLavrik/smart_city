@@ -5,8 +5,8 @@ import smartcity
 from flask import current_app
 from smartcity.api import req_parsers
 from flask_restplus import Api, Resource
-
-from smartcity.business import get_stats, get_available_stats_list
+from flask import send_file
+from smartcity.business import get_stats, get_available_stats_list, get_pdf
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +59,24 @@ class AvailableStats(Resource):
 
         resp = {"status": "Success", "stats": stats_result}
         return resp, 200
+
+@api.route("/pdf/<stats_tag>")
+class PDFRep(Resource):
+    @api.response(200, "Success")
+    @api.response(400, "Validation Error")
+    @api.response(500, "Internal Error")
+    def get(self, stats_tag):
+        """
+        :return:
+        """
+
+        logger.info(f'PDF for tag {stats_tag} requested')
+        # get_pdf(stats_tag)
+
+
+        resp = {"status": "Success"}
+        print(os.listdir())
+        return send_file("fig1.pdf")
 
 
 @api.route("/parser")

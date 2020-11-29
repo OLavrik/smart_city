@@ -1,0 +1,26 @@
+table.minimalistBlack {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 13px;
+}
+table.minimalistBlack thead {
+  background: #AEC3CF;
+  background: -moz-linear-gradient(top, #c2d2db 0%, #b6c9d3 66%, #AEC3CF 100%);
+  background: -webkit-linear-gradient(top, #c2d2db 0%, #b6c9d3 66%, #AEC3CF 100%);
+  background: linear-gradient(to bottom, #c2d2db 0%, #b6c9d3 66%, #AEC3CF 100%);
+}
+table.minimalistBlack thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}

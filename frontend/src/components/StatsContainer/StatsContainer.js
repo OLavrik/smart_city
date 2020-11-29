@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import {getStatsList, getStatsByTag} from "../../Api";
+import {getStatsList, getStatsByTag, getPDF} from "../../Api";
 import StatsTable from "../StatsTable";
-import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer} from "mdbreact";
+import {MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBContainer, MDBBtn} from "mdbreact";
 import MapContainer from "../MapContainer";
 
 class StatsContainer extends Component {
@@ -45,6 +45,10 @@ class StatsContainer extends Component {
             this.doGetStatsTable()
         }
     }
+    onDownloadBtnCLick = () => {
+        getPDF(this.state.selectedStat)
+    }
+
 
     render() {
         console.log(this.state)
@@ -80,6 +84,9 @@ class StatsContainer extends Component {
                             </div>
                             <div>
                                 <MapContainer data={this.state.statsData}/>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <MDBBtn onClick={this.onDownloadBtnCLick} className="mb-5">Скачать отчет</MDBBtn>
                             </div>
                             <StatsTable data={this.state.statsData}/>
                         </div>
