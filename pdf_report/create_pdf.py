@@ -8,9 +8,8 @@ import plotly
 import plotly.offline as py
 import plotly.graph_objs as go
 
-def create_plot():
-    with open("/Users/Olga.Lavrichenko/Documents/Smart_City/smart_city/json_data/zhkh_cities_COLD_WATER.json", 'r') as json_file:
-        json_data = json.load(json_file)
+def create_plot(json_data):
+
     print(json_data)
     title=json_data["title"]
     data=[]
