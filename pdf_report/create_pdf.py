@@ -2,37 +2,56 @@ import pandas as pd
 import pandas as pd
 import numpy as np
 import matplotlib
+import json
 
 import plotly
 import plotly.offline as py
 import plotly.graph_objs as go
 
 def create_plot():
-    df = pd.read_csv('/Users/Olga.Lavrichenko/Documents/Smart_City/smart_city/dataprocessing/gks/Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu__1-kanalizatsia.csv')
-    df = df.dropna()
-    df = df.sort_values(by='2018 г.', ascending=True)
-    x=df["Unnamed: 0"].values
+    with open("/Users/Olga.Lavrichenko/Documents/Smart_City/smart_city/json_data/zhkh_cities_COLD_WATER.json", 'r') as json_file:
+        json_data = json.load(json_file)
+    print(json_data)
+    title=json_data["title"]
+    data=[]
+    d={}
+    for elem in json_data["data"]:
+        towns = [_ for _ in elem.values()][0]
+        regions=[_ for _  in  elem.keys()][0]
+        d[regions]=towns
+        #
+        # data.extend(res)
+    # f=[_ for _ in [elem for elem in json_data["data"]]]
+    #
+    # print(df.head)
+    # # df = pd.read_csv('/Users/Olga.Lavrichenko/Documents/Smart_City/smart_city/dataprocessing/gks/Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu__1-kanalizatsia.csv')
+    # df = df.dropna()
+    for index, val in d.items():
 
-    y=df["2018 г."].values
-    data = go.Data([
-        go.Bar(
-            y=x,
-            x=y,
-            orientation='h'
-        )])
-    layout = go.Layout(
-        height=1000,
-        margin=go.Margin(l=300),
-        title="Выделенные финансы на энергосбережение"
-    )
-    fig = go.Figure(data=data, layout=layout)
-    fig.write_image("fig1.pdf")
-    py.plot(fig)
+        main_column=json_data["columns"][-1]
+        df = pd.DataFrame(data=val, columns=json_data["columns"])
+        make_save_pdf(df, index)
+        df = df.sort_values(by=main_column, ascending=True)
+        x=df[json_data["columns"][0]]
+        y=df[main_column].values
+        data = go.Data([
+            go.Bar(
+                y=x,
+                x=y,
+                orientation='h'
+            )])
+        layout = go.Layout(
+            height=1000,
+            margin=go.Margin(l=100),
+            title=title
+        )
+        fig = go.Figure(data=data, layout=layout)
+        fig.write_image(index+"_distribution.pdf")
+        py.plot(fig)
+        break
 
-def make_save_pdf(path=""):
-    df = pd.read_csv('/Users/Olga.Lavrichenko/Documents/Smart_City/smart_city/dataprocessing/gks/Ekonomia_ot_provedennykh_meropriatiy_po_energosberezheniyu__1-kanalizatsia.csv')
-    df = df.dropna()
-    df.head()
+def make_save_pdf(df, label=""):
+
     html='''
 <!DOCTYPE html>
 <html >
@@ -70,7 +89,7 @@ tr:nth-child(even) {
     html += df.to_html()
     html+="""
     </html>"""
-    with open("filename.html", "w", encoding="utf-8") as file:
+    with open(label+"_tabel.html", "w", encoding="utf-8") as file:
         file.write(html)
 
 
