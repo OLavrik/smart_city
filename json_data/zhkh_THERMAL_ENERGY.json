@@ -2,10 +2,10 @@
   "tag": "zkh_termal",
   "title": "Оснащенность многоквартирных домов общедомовыми приборами учета теплоносителя",
   "columns": [
-    "territory",
-    "housesWithServiceType",
-    "housesWithDevices",
-    "percentHouseWithDevices"
+    "Город",
+    "Кол-во подключенных домов",
+    "Кол-во оснащенных домов",
+    "Процентная составляющая"
   ],
   "data": [
     [
