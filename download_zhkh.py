@@ -95,8 +95,23 @@ REG_MAPPING = {
     "тульская": "Тульская область"
 }
 
+titles_mapping = {
+    'COLD_WATER': "Оснащенность многоквартирных домов общедомовыми приборами учета холодной воды",
+    'HOT_WATER': "Оснащенность многоквартирных домов общедомовыми приборами учета горячей воды",
+    'ELECTRICITY': "Оснащенность многоквартирных домов общедомовыми приборами учета электроэнергии",
+    'THERMAL_ENERGY': "Оснащенность многоквартирных домов общедомовыми приборами учета теплоносителя"
+}
 
-def dowload_resource(label):
+columns_mapping = {
+    'territory': "Город",
+    'housesWithServiceType': "Кол-во подключенных домов",
+    'housesWithDevices': "Кол-во оснащенных домов",
+    'percentHouseWithDevices': "Процентная составляющая"
+}
+
+columns_russian = ["Город", "Кол-во подключенных домов", "Кол-во оснащенных домов", "Процентная составляющая"]
+
+def download_resource(label):
     print(f"Downloading resource")
     headers = {'Content-Type': 'application/json;charset=UTF-8', }
     data = '{"withFederalDistricts":false,"serviceType":"' + f'{label}' + '","territories":[],"territoryCategory":"ADMINISTRATIVE","operationYearFrom":1700,"operationYearTo":2020}'
@@ -107,7 +122,7 @@ def dowload_resource(label):
     return resource
 
 
-def convert_resource(resource):
+def convert_resource(resource, sphere_name):
     table_raw = resource[0]['children']
     columns = ['territory', 'housesWithServiceType', 'housesWithDevices', 'percentHouseWithDevices']
     data = []
@@ -118,14 +133,12 @@ def convert_resource(resource):
         indicators.append(area['housesWithDevices'])
         indicators.append(area['percentHouseWithDevices'])
         data.append(indicators)
-    return {'columns': columns, 'data': data}
+    return {'columns': columns_russian, 'data': data}
 
 
 for label in ['COLD_WATER', 'HOT_WATER', 'ELECTRICITY', 'THERMAL_ENERGY']:
-    resource = dowload_resource(label)
-    dictionary = convert_resource(resource)
-
-
+    resource = download_resource(label)
+    dictionary = convert_resource(resource, label.lower())
 
     data = pd.DataFrame(data=dictionary["data"], columns=dictionary["columns"])
 
@@ -137,13 +150,15 @@ for label in ['COLD_WATER', 'HOT_WATER', 'ELECTRICITY', 'THERMAL_ENERGY']:
         print(f"Failed to map {former_name}")
         return pd.NA
 
-    data['territory'] = data['territory'].apply(f)
-    # print(data)
-    data = data.groupby('territory').sum().reset_index()
-    # print(data)
+    data[columns_mapping['territory']] = data[columns_mapping['territory']].apply(f)
+    data = data.groupby(columns_mapping['territory']).sum().reset_index()
     di = data.to_dict(orient='split')
     del di['index']
+    
+    res = {}
+    res['tag'] = "zhkh_" + label.lower()
+    res['title'] = titles_mapping[label]
+    res.update(di)
 
-    print(data)
-    with open(f"zhkh_{label}.json", 'wt', encoding='utf-8') as f:
-        json.dump(di, f, ensure_ascii=False, indent=2)
+    with open(f"./json_data/zhkh_{label}.json", 'wt', encoding='utf-8') as f:
+        json.dump(res, f, ensure_ascii=False, indent=2)
