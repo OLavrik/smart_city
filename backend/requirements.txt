@@ -6,3 +6,6 @@ flask-restplus
 numpy
 pandas
 pymongo
+matplotlib
+plotly
+

@@ -51,3 +51,23 @@ docker run -it -p 8080:8080 smartcity
 - All dependencies stuff can be done via PyCharm menus
 - Mark `backend` directory as a *Sources root* - it will become blue
 - Create start target at `backend\smartcity\app.py`
+
+
+## Start mongo
+```
+docker run --name some-mongo -d -p 27017:27017 mongo
+mongo
+#> next commands are from Mongo shell
+show dbs
+# create new database named "smartcity_deb"
+use smartcity_deb
+#> pause mongo shell
+cd json_data
+# this will enter data
+python ./add_stats_to_db.py
+# 
+
+
+
+
+```
